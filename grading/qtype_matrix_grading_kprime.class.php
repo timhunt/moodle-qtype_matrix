@@ -15,11 +15,11 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * 
+ *
  * Total grading - i.e. including rows.
- * 
- * The student must choose all correct answers, and none of the wrong ones 
- * to get 100% otherwise he gets 0%. Including rows. 
+ *
+ * The student must choose all correct answers, and none of the wrong ones
+ * to get 100% otherwise he gets 0%. Including rows.
  * If one row is wrong then the mark for the question is 0.
  */
 class qtype_matrix_grading_kprime extends qtype_matrix_grading
@@ -38,7 +38,7 @@ class qtype_matrix_grading_kprime extends qtype_matrix_grading
     }
 
     /**
-     * Factory 
+     * Factory
      *
      * @param string $type
      * @return qtype_matrix_grading_kprime
@@ -54,10 +54,10 @@ class qtype_matrix_grading_kprime extends qtype_matrix_grading
 
     /**
      * Returns the question's grade. By default it is the average of correct questions.
-     * 
+     *
      * @param qtype_matrix_question $question
      * @param array                 $answers
-     * @return float 
+     * @return float
      */
     public function grade_question($question, $answers)
     {
@@ -70,10 +70,10 @@ class qtype_matrix_grading_kprime extends qtype_matrix_grading
         return 1;
     }
 
-   
+
     /**
      * Grade a row
-     * 
+     *
      * @param qtype_matrix_question $question   The question to grade
      * @param integer|object $row               Row to grade
      * @param array $responses                  User's responses

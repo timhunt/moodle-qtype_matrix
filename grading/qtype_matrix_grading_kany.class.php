@@ -15,9 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Per row grading. The total grade is the average of grading received 
+ * Per row grading. The total grade is the average of grading received
  * for reach one of the rows.
- * 
+ *
  * Any correct and no wrong answer to get 100% otherwise 0
  */
 class qtype_matrix_grading_kany extends qtype_matrix_grading
@@ -36,7 +36,7 @@ class qtype_matrix_grading_kany extends qtype_matrix_grading
     }
 
     /**
-     * Factory 
+     * Factory
      *
      * @param string $type
      * @return qtype_matrix_grading_kany
@@ -69,7 +69,7 @@ class qtype_matrix_grading_kany extends qtype_matrix_grading
 
     /**
      * Grade a row
-     * 
+     *
      * @param qtype_matrix_question $question   The question to grade
      * @param integer|object $row               Row to grade
      * @param array $responses                  User's responses

@@ -25,9 +25,9 @@ require_once($CFG->dirroot . '/question/type/matrix/libs/config.php');
 
 /**
  * matrix editing form definition. For information about the Moodle forms library,
- * which is based on the HTML Quickform PEAR library 
- * 
- * @see http://docs.moodle.org/en/Development:lib/formslib.php 
+ * which is based on the HTML Quickform PEAR library
+ *
+ * @see http://docs.moodle.org/en/Development:lib/formslib.php
  */
 class qtype_matrix_edit_form extends question_edit_form implements ArrayAccess
 {
@@ -50,7 +50,7 @@ class qtype_matrix_edit_form extends question_edit_form implements ArrayAccess
 
     /**
      *
-     * @var matrix_form_builder 
+     * @var matrix_form_builder
      */
     private $builder = null;
 
@@ -348,12 +348,12 @@ class qtype_matrix_edit_form extends question_edit_form implements ArrayAccess
     public function get_javascript()
     {
         return <<<EOT
-        
-        var YY = null;               
-        
+
+        var YY = null;
+
         window.mtrx_current = false;
         function mtrx_popup(id)
-        {        
+        {
             var current_id = window.mtrx_current;
             var new_id = '#' + id;
             if(current_id == false)
@@ -372,24 +372,24 @@ class qtype_matrix_edit_form extends question_edit_form implements ArrayAccess
             {
                 node = YY.one(current_id);
                 node.setStyle('display', 'none');
-                
+
                 node = YY.one(new_id)
                 node.setStyle('display', 'block');
                 window.mtrx_current = new_id;
             }
-        }        
-        
+        }
+
         YUI(M.yui.loader).use('node', function(Y) {
             YY = Y;
-            }); 
-        
-        
+            });
+
+
 EOT;
     }
 
     /**
      * Returns the current number of columns
-     * 
+     *
      * @return integer The number of columns
      */
     protected function param_cols()
@@ -411,7 +411,7 @@ EOT;
 
     /**
      * True if the user asked to add a column. False otherwise.
-     * 
+     *
      * @return columns to add
      */
     protected function param_add_columns()
@@ -438,7 +438,7 @@ EOT;
 
     /**
      * True if the user asked to add a row. False otherwise.
-     * 
+     *
      * @return rows to add
      */
     protected function param_add_rows()
@@ -447,7 +447,7 @@ EOT;
     }
 
     /**
-     * 
+     *
      * @return The grade method parameter
      */
     protected function param_grade_method()
@@ -457,7 +457,7 @@ EOT;
     }
 
     /**
-     * 
+     *
      * @return bool Whether the question allows multiple answers
      */
     protected function param_multiple()

@@ -33,7 +33,7 @@ class qtype_matrix_test_helper extends question_test_helper
 
     /**
      *
-     * @return qtype_matrix_question 
+     * @return qtype_matrix_question
      */
     public function make_matrix_question_multiple()
     {
@@ -44,7 +44,7 @@ class qtype_matrix_test_helper extends question_test_helper
 
     /**
      *
-     * @return qtype_matrix_question 
+     * @return qtype_matrix_question
      */
     public function make_matrix_question_single()
     {
@@ -55,7 +55,7 @@ class qtype_matrix_test_helper extends question_test_helper
 
     /**
      *
-     * @return qtype_matrix_question 
+     * @return qtype_matrix_question
      */
     public function make_matrix_question_kprime()
     {
@@ -66,7 +66,7 @@ class qtype_matrix_test_helper extends question_test_helper
 
     /**
      *
-     * @return qtype_matrix_question 
+     * @return qtype_matrix_question
      */
     public function make_matrix_question_all()
     {
@@ -77,7 +77,7 @@ class qtype_matrix_test_helper extends question_test_helper
 
     /**
      *
-     * @return qtype_matrix_question 
+     * @return qtype_matrix_question
      */
     public function make_matrix_question_any()
     {
@@ -88,7 +88,7 @@ class qtype_matrix_test_helper extends question_test_helper
 
     /**
      *
-     * @return qtype_matrix_question 
+     * @return qtype_matrix_question
      */
     public function make_matrix_question_none()
     {
@@ -99,7 +99,7 @@ class qtype_matrix_test_helper extends question_test_helper
 
     /**
      *
-     * @return qtype_matrix_question 
+     * @return qtype_matrix_question
      */
     public function make_matrix_question_weighted()
     {
@@ -133,7 +133,7 @@ class qtype_matrix_test_helper extends question_test_helper
 
     /**
      *
-     * @return qtype_matrix_question 
+     * @return qtype_matrix_question
      */
     protected function make_matrix_question()
     {

@@ -110,14 +110,14 @@ class qtype_matrix extends question_type
     }
 
     /**
-     * 
+     *
      * @param object $question
      * @return boolean
      */
     function get_question_options($question)
     {
         parent::get_question_options($question);
-        $matrix = self::retrieve_matrix($question->id);       
+        $matrix = self::retrieve_matrix($question->id);
         if ($matrix) {
             $question->options->rows = $matrix->rows;
             $question->options->cols = $matrix->cols;
@@ -158,7 +158,7 @@ class qtype_matrix extends question_type
 
         $raw_weights = $store->get_matrix_weights_by_question_id($question_id);
 
-        //initialize weights      
+        //initialize weights
         $matrix->weights = array();
         foreach ($matrix->rows as $row) {
             $matrix->weights[$row->id] = array();
@@ -213,7 +213,7 @@ class qtype_matrix extends question_type
         $matrix = (object) $store->get_matrix_by_question_id($question_id);
 
         $is_new = !isset($matrix->id) || empty($matrix->id);
-        
+
         $matrix->questionid = $question_id;
         $matrix->multiple = $question->multiple;
         $matrix->grademethod = $question->grademethod;
@@ -284,25 +284,25 @@ class qtype_matrix extends question_type
 
         /**
          * Wheights
-         * 
+         *
          * First we delete all weights. (There is no danger of deleting the original weights when making a copy, because we are anyway deleting only weights associated with our newly created question ID).
          * Then we recreate them. (Because updating is too much of a pain)
-         * 
+         *
          */
         $store->delete_matrix_weights($question_id);
 
         /**
          * When we switch from multiple answers to single answers (or the other
-         * way around) we loose answers. 
-         * 
-         * To avoid loosing information when we switch, we test if the weight matrix is empty. 
-         * If the weight matrix is empty we try to read from the other 
+         * way around) we loose answers.
+         *
+         * To avoid loosing information when we switch, we test if the weight matrix is empty.
+         * If the weight matrix is empty we try to read from the other
          * representation directly from POST data.
-         * 
+         *
          * We read from the POST because post data are not read into the question
          * object because there is no corresponding field.
-         * 
-         * This is bit hacky but it is safe. The to_weight_matrix returns only 
+         *
+         * This is bit hacky but it is safe. The to_weight_matrix returns only
          * 0 or 1.
          */
         $weights = array();
@@ -336,25 +336,25 @@ class qtype_matrix extends question_type
     }
 
     /**
-     * Transform the weight from the edit-form's representation to a standard matrix 
+     * Transform the weight from the edit-form's representation to a standard matrix
      * representation
-     * 
+     *
      * Input data is either
-     * 
+     *
      *      $question->{cell0_1] = 1
-     * 
+     *
      * or
-     * 
+     *
      *      $question->{cell0] = 3
-     * 
+     *
      * Output
-     * 
+     *
      *      [ 1 0 1 0 ]
      *      [ 0 0 0 1 ]
      *      [ 1 1 1 0 ]
      *      [ 0 1 0 1 ]
-     * 
-     * 
+     *
+     *
      * @param object $data              Question's data, either from the question object or from the post
      * @param boolean $from_multiple    Whether we extract from multiple representation or not
      * @result array                    The weights
@@ -395,7 +395,7 @@ class qtype_matrix extends question_type
 
     /**
      * True if the matrix is empty (contains only zeroes). False otherwise.
-     * 
+     *
      * @param array $matrix Array of arrays
      * @return boolean True if the matrix contains only zeros. False otherwise
      */

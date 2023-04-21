@@ -19,7 +19,7 @@ defined('MOODLE_INTERNAL') || die();
 /**
  * restore plugin class that provides the necessary information
  * needed to restore one match qtype plugin
- * 
+ *
  * Note
  * Failing to see why we are using $GLOBALS here. Adding a property to the class
  * should do the work.
@@ -55,7 +55,7 @@ class restore_qtype_matrix_plugin extends restore_qtype_plugin
 
     /**
      * Detect if the question is created or mapped
-     * 
+     *
      * @return bool
      */
     protected function is_question_created()

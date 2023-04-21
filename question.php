@@ -41,8 +41,8 @@ class qtype_matrix_question extends question_graded_automatically_with_countback
     /**
      * Contains the keys of the rows array
      * Used to maintain order when shuffling answers
-     * 
-     * @var array 
+     *
+     * @var array
      */
     protected $order = null;
 
@@ -58,12 +58,12 @@ class qtype_matrix_question extends question_graded_automatically_with_countback
     /**
      *
      * @param mixed $row
-     * @param mixed $col 
-     * 
+     * @param mixed $col
+     *
      * or
-     * 
+     *
      * @param object $key
-     * 
+     *
      * @return float
      */
     public function weight($row = null, $col = null)
@@ -98,11 +98,11 @@ class qtype_matrix_question extends question_graded_automatically_with_countback
     /**
      * The user's response of cell at $row, $col. That is if the cell is checked or not.
      * If the user didn't make an answer at all (no response) the method returns false.
-     * 
+     *
      * @param array $response  object containing the raw answer data
      * @param any $row          matrix row, either an id or an object
      * @param any $col          matrix col, either an id or an object
-     * 
+     *
      * @return boolean True if the cell($row, $col) was checked by the user. False otherwise.
      */
     public function response($response, $row, $col)
@@ -111,19 +111,19 @@ class qtype_matrix_question extends question_graded_automatically_with_countback
          * A student may response with a question with the multiple answer turned on.
          * Later the teacher may turn that flag off. The result is that the question
          * and response formats won't match.
-         * 
+         *
          * To fix that problem we don't use the question->multiple flag but instead we
          * use the use the user's response to detect the correct value.
-         * 
+         *
          * Note
          * A part of the problems come from the fact that we use two representation formats
          * depending on the multiple flags. The cause is the html matrix representation
          * that requires two differents views (checkboxes or radio). This representation
          * then leaks to memory.
-         * 
-         * A better strategy would be to use only one normalized representation in memory. 
-         * The same way we have only one representation in the DB. For that we 
-         * would need to transform the html form data after the post. 
+         *
+         * A better strategy would be to use only one normalized representation in memory.
+         * The same way we have only one representation in the DB. For that we
+         * would need to transform the html form data after the post.
          * Not sure we can dot it.
          */
         $response_multiple = $this->multiple;
@@ -147,10 +147,10 @@ class qtype_matrix_question extends question_graded_automatically_with_countback
 
     /**
      * Returns the expected answer for the cell at $row, $col.
-     * 
+     *
      * @param integer|object $row
      * @param integer|object $col
-     * 
+     *
      * @return boolean  True if cell($row, $col) is correct, false otherwise.
      */
     public function answer($row = null, $col = null)
@@ -169,11 +169,11 @@ class qtype_matrix_question extends question_graded_automatically_with_countback
      * Any information about how the question has been set up for this attempt
      * should be stored in the $step, by calling $step->set_qt_var(...).
      *
-     * @param question_attempt_step $step 
-     *          The first step of the {@link question_attempt} being started. 
+     * @param question_attempt_step $step
+     *          The first step of the {@link question_attempt} being started.
      *          Can be used to store state.
-     * @param int $variant 
-     *          Which variant of this question to start. Will be between 
+     * @param int $variant
+     *          Which variant of this question to start. Will be between
      *          1 and {@link get_num_variants()} inclusive.
      */
     function start_attempt(question_attempt_step $step, $variant)
@@ -198,10 +198,10 @@ class qtype_matrix_question extends question_graded_automatically_with_countback
      * Question shuffle can be disabled at the Quiz level. If false then the
      * question parts are not shuffled. If true then the question's shuffle parameter
      * decide wheter the question's parts are actually shuffled.
-     * 
+     *
      * If the question is executed outside of a Quiz (for example in preview)
-     * returns true. 
-     * 
+     * returns true.
+     *
      * @global object $DB       Database object
      * @global object $PAGE     Page object
      * @return boolean          True if shuffling is authorized. False otherwise.
@@ -218,7 +218,7 @@ class qtype_matrix_question extends question_graded_automatically_with_countback
     }
 
     /**
-     * 
+     *
      * @return boolean True if rows should be shuffled. False otherwise.
      */
     function shuffle_answers()
@@ -231,7 +231,7 @@ class qtype_matrix_question extends question_graded_automatically_with_countback
 
     /**
      * Write persistent data to a step for further retrieval
-     * 
+     *
      * @param question_attempt_step $step Storage
      */
     protected function write_data(question_attempt_step $step)
@@ -241,7 +241,7 @@ class qtype_matrix_question extends question_graded_automatically_with_countback
 
     /**
      * Load persistent data from a step.
-     * 
+     *
      * @param question_attempt_step $step Storage
      */
     protected function load_data(question_attempt_step $step)
@@ -251,7 +251,7 @@ class qtype_matrix_question extends question_graded_automatically_with_countback
             $this->order = explode(',', $order);
         } else {
             /**
-             * The order doesn't exist in the database. 
+             * The order doesn't exist in the database.
              * This can happen because the question is old and doesn't have the shuffling possibility yet.
              */
             $this->order = array_keys($this->rows);
@@ -338,13 +338,13 @@ class qtype_matrix_question extends question_graded_automatically_with_countback
     /**
      * Work out a final grade for this attempt, taking into account all the
      * tries the student made.
-     * 
+     *
      * @param array $responses the response for each try. Each element of this
      * array is a response array, as would be passed to {@link grade_response()}.
      * There may be between 1 and $totaltries responses.
-     * 
+     *
      * @param int $totaltries The maximum number of tries allowed.
-     * 
+     *
      * @return numeric the fraction that should be awarded for this
      * sequence of response.
      */
@@ -399,7 +399,7 @@ class qtype_matrix_question extends question_graded_automatically_with_countback
 
     /**
      * Produce a plain text summary of a response.
-     * 
+     *
      * @param array response A response, as might be passed to {@link grade_response()}.
      * @return string a plain text summary of that response, that could be used in reports.
      */
@@ -512,7 +512,7 @@ class qtype_matrix_question extends question_graded_automatically_with_countback
     /**
      * Returns an array where keys are the weights' cell names and the values
      * are the weights
-     * 
+     *
      * @return array
      */
     public function cells()

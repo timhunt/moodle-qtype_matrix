@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * 
+ *
  */
 class question_matrix_store
 {
@@ -38,7 +38,7 @@ class question_matrix_store
         }
         return $result;
     }
-    
+
     public function save_matrix($question)
     {
         $is_new = empty($question->id);
@@ -51,7 +51,7 @@ class question_matrix_store
 
     /**
      * We may want to insert an existing question to make a copy
-     * 
+     *
      * @param object $matrix
      * @return object
      */
@@ -60,7 +60,7 @@ class question_matrix_store
         global $DB;
 
         $data = (object) array(
-                'questionid' => $matrix->questionid, 
+                'questionid' => $matrix->questionid,
                 'multiple' => $matrix->multiple,
                 'grademethod' => $matrix->grademethod,
                 'use_dnd_ui' => $matrix->use_dnd_ui,
@@ -79,8 +79,8 @@ class question_matrix_store
         global $DB;
 
         $data = (object) array(
-                'id' => $matrix->id, 
-                'questionid' => $matrix->questionid, 
+                'id' => $matrix->id,
+                'questionid' => $matrix->questionid,
                 'multiple' => $matrix->multiple,
                 'grademethod' => $matrix->grademethod,
                 'use_dnd_ui' => $matrix->use_dnd_ui,
@@ -106,7 +106,7 @@ class question_matrix_store
          */
         //wheights
         $sql = "DELETE FROM {$prefix}question_matrix_weights
-                WHERE {$prefix}question_matrix_weights.rowid IN 
+                WHERE {$prefix}question_matrix_weights.rowid IN
                       (
                       SELECT question_matrix_rows.id FROM {$prefix}question_matrix_rows  AS question_matrix_rows
                       INNER JOIN {$prefix}question_matrix      AS matrix ON question_matrix_rows.matrixid = matrix.id
@@ -116,7 +116,7 @@ class question_matrix_store
 
         //rows
         $sql = "DELETE FROM {$prefix}question_matrix_rows
-                WHERE {$prefix}question_matrix_rows.matrixid IN 
+                WHERE {$prefix}question_matrix_rows.matrixid IN
                       (
                       SELECT matrix.id FROM {$prefix}question_matrix AS matrix
                       WHERE matrix.questionid = $question_id
@@ -125,7 +125,7 @@ class question_matrix_store
 
         //cols
         $sql = "DELETE FROM {$prefix}question_matrix_cols
-                WHERE {$prefix}question_matrix_cols.matrixid IN 
+                WHERE {$prefix}question_matrix_cols.matrixid IN
                       (
                       SELECT matrix.id FROM {$prefix}question_matrix AS matrix
                       WHERE matrix.questionid = $question_id
@@ -201,7 +201,7 @@ class question_matrix_store
     {
         global $DB;
 
-        // TODO: Add a possibility to delete if (empty($short)) 
+        // TODO: Add a possibility to delete if (empty($short))
         $data = (object) array(
                 'id' => $row->id,
                 'matrixid' => $row->matrixid,
@@ -283,7 +283,7 @@ class question_matrix_store
     {
         global $DB;
 
-        // TODO: Add a possibility to delete if (empty($short)) 
+        // TODO: Add a possibility to delete if (empty($short))
         $data = (object) array(
                 'id' => $col->id,
                 'matrixid' => $col->matrixid,
@@ -314,14 +314,14 @@ class question_matrix_store
         $prefix = $CFG->prefix;
 
         //todo: check AND?
-        $sql = "SELECT weights.* 
+        $sql = "SELECT weights.*
                 FROM {$prefix}question_matrix_weights AS weights
-                WHERE 
+                WHERE
                     rowid IN (SELECT question_matrix_rows.id FROM {$prefix}question_matrix_rows     AS question_matrix_rows
                               INNER JOIN {$prefix}question_matrix                   AS matrix ON question_matrix_rows.matrixid = matrix.id
                               WHERE matrix.questionid = $question_id)
                     OR
-                              
+
                     colid IN (SELECT cols.id FROM {$prefix}question_matrix_cols     AS cols
                               INNER JOIN {$prefix}question_matrix                   AS matrix ON cols.matrixid = matrix.id
                               WHERE matrix.questionid = $question_id)

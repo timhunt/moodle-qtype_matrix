@@ -21,7 +21,7 @@ class matrix_form_builder implements ArrayAccess
 {
 
     private $_form = null;
-    
+
     function __construct($form) {
        $this->_form = $form;
    }
@@ -247,7 +247,7 @@ class matrix_form_builder implements ArrayAccess
     }
 
     // implement ArrayAccess
-    
+
     public function offsetExists($offset)
     {
         return $this->_form->elementExists($offset);

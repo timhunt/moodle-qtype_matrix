@@ -1,4 +1,4 @@
-<?php 
+<?php
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -35,7 +35,7 @@ $string['weighted'] = 'Point partiel';
 $string['true'] = 'Vraie';
 $string['false'] = 'Fausse';
 
-// form 
+// form
 $string['multipleallowed'] = 'Est-ce que plusieurs réponses sont autorisées ?';
 
 $string['grademethod'] = 'Méthode d\'évaluation';
