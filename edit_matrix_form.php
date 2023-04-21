@@ -54,13 +54,11 @@ class qtype_matrix_edit_form extends question_edit_form implements ArrayAccess
      */
     private $builder = null;
 
-    function qtype()
-    {
+    function qtype() {
         return 'matrix';
     }
 
-    function definition_inner($mform)
-    {
+    function definition_inner($mform) {
         $this->builder = new matrix_form_builder($mform);
         $builder = $this->builder;
 
@@ -86,16 +84,14 @@ class qtype_matrix_edit_form extends question_edit_form implements ArrayAccess
      * This method is called after definition(), data submission and set_data().
      * All form setup that is dependent on form values should go in here.
      */
-    function definition_after_data()
-    {
+    function definition_after_data() {
         $builder = $this->builder;
 
         $this->add_matrix();
         $builder->add_javascript($this->get_javascript());
     }
 
-    function set_data($question)
-    {
+    function set_data($question) {
         $is_new = empty($question->id);
         if (!$is_new) {
 
@@ -152,8 +148,7 @@ class qtype_matrix_edit_form extends question_edit_form implements ArrayAccess
         parent::set_data($question);
     }
 
-    function validation($data, $files)
-    {
+    function validation($data, $files) {
         $errors = parent::validation($data, $files);
         if (config::show_kprime_gui()) {
             if ($this->col_count($data) == 0) {
@@ -179,19 +174,16 @@ class qtype_matrix_edit_form extends question_edit_form implements ArrayAccess
         return $errors ?: true;
     }
 
-    protected function col_count($data)
-    {
+    protected function col_count($data) {
         return count($data['cols_shorttext']);
     }
 
-    protected function row_count($data)
-    {
+    protected function row_count($data) {
         return count($data['rows_shorttext']);
     }
 
     //elements
-    public function add_multiple()
-    {
+    public function add_multiple() {
         // multiple allowed
         $builder = $this->builder;
 
@@ -204,8 +196,7 @@ class qtype_matrix_edit_form extends question_edit_form implements ArrayAccess
         }
     }
 
-    public function add_grading()
-    {
+    public function add_grading() {
         $builder = $this->builder;
 
         // grading method.
@@ -225,8 +216,7 @@ class qtype_matrix_edit_form extends question_edit_form implements ArrayAccess
         $builder->add_help_button(self::PARAM_GRADE_METHOD);
     }
 
-    function add_matrix()
-    {
+    function add_matrix() {
         $mform = $this->_form;
         $builder = $this->builder;
 
@@ -345,25 +335,21 @@ class qtype_matrix_edit_form extends question_edit_form implements ArrayAccess
         $this->_form->setExpanded('matrixheader');
     }
 
-    public function get_javascript()
-    {
+    public function get_javascript() {
         return <<<EOT
 
         var YY = null;
 
         window.mtrx_current = false;
-        function mtrx_popup(id)
-        {
+        function mtrx_popup(id) {
             var current_id = window.mtrx_current;
             var new_id = '#' + id;
-            if(current_id == false)
-            {
+            if(current_id == false) {
                 node = YY.one(new_id);
                 node.setStyle('display', 'block');
                 window.mtrx_current = new_id;
             }
-            else if(current_id == new_id)
-            {
+            else if(current_id == new_id) {
                 node = YY.one(window.mtrx_current);
                 node.setStyle('display', 'none');
                 window.mtrx_current = false;
@@ -392,8 +378,7 @@ EOT;
      *
      * @return integer The number of columns
      */
-    protected function param_cols()
-    {
+    protected function param_cols() {
         $result = self::DEFAULT_COLS;
         if (isset($_POST[self::PARAM_COLS])) {
             $result = count($_POST[self::PARAM_COLS]);
@@ -414,13 +399,11 @@ EOT;
      *
      * @return columns to add
      */
-    protected function param_add_columns()
-    {
+    protected function param_add_columns() {
         return optional_param(self::PARAM_ADD_COLUMNS, '', PARAM_TEXT);
     }
 
-    protected function param_rows()
-    {
+    protected function param_rows() {
         $result = self::DEFAULT_ROWS;
 
         if (isset($_POST[self::PARAM_ROWS])) {
@@ -441,8 +424,7 @@ EOT;
      *
      * @return rows to add
      */
-    protected function param_add_rows()
-    {
+    protected function param_add_rows() {
         return (bool)optional_param(self::PARAM_ADD_ROWS, '', PARAM_TEXT);
     }
 
@@ -450,8 +432,7 @@ EOT;
      *
      * @return The grade method parameter
      */
-    protected function param_grade_method()
-    {
+    protected function param_grade_method() {
         $data = $this->_form->exportValues();
         return $data[self::PARAM_GRADE_METHOD] ?? qtype_matrix::defaut_grading()->get_name();
     }
@@ -460,31 +441,26 @@ EOT;
      *
      * @return bool Whether the question allows multiple answers
      */
-    protected function param_multiple()
-    {
+    protected function param_multiple() {
         $data = $this->_form->exportValues();
         return $data[self::PARAM_MULTIPLE] ?? self::DEFAULT_MULTIPLE;
     }
 
     // implement ArrayAccess
 
-    public function offsetExists($offset)
-    {
+    public function offsetExists($offset) {
         return $this->_form->elementExists($offset);
     }
 
-    public function offsetGet($offset)
-    {
+    public function offsetGet($offset) {
         return $this->_form->getElement($offset);
     }
 
-    public function offsetSet($offset, $value)
-    {
+    public function offsetSet($offset, $value) {
         $this->_form->addElement($value);
     }
 
-    public function offsetUnset($offset)
-    {
+    public function offsetUnset($offset) {
         $this->_form->removeElement($offset);
     }
 

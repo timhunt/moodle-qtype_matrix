@@ -27,13 +27,11 @@ class qtype_matrix_grading_kprime extends qtype_matrix_grading
 
     const TYPE = 'kprime';
 
-    public static function get_name()
-    {
+    public static function get_name() {
         return self::TYPE;
     }
 
-    public static function get_title()
-    {
+    public static function get_title() {
         return qtype_matrix::get_string(self::TYPE);
     }
 
@@ -43,8 +41,7 @@ class qtype_matrix_grading_kprime extends qtype_matrix_grading
      * @param string $type
      * @return qtype_matrix_grading_kprime
      */
-    public static function create($type)
-    {
+    public static function create($type) {
         static $result = false;
         if ($result) {
             return $result;
@@ -59,8 +56,7 @@ class qtype_matrix_grading_kprime extends qtype_matrix_grading
      * @param array                 $answers
      * @return float
      */
-    public function grade_question($question, $answers)
-    {
+    public function grade_question($question, $answers) {
         foreach ($question->rows as $row) {
             $grade = $this->grade_row($question, $row, $answers);
             if ($grade < 1) {
@@ -79,8 +75,7 @@ class qtype_matrix_grading_kprime extends qtype_matrix_grading
      * @param array $responses                  User's responses
      * @return float                            The row grade, either 0 or 1
      */
-    public function grade_row($question, $row, $responses)
-    {
+    public function grade_row($question, $row, $responses) {
         foreach ($question->cols as $col) {
             $answer = $question->answer($row, $col);
             $response = $question->response($responses, $row, $col);

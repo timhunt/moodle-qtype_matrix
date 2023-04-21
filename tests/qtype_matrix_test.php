@@ -43,13 +43,11 @@ class qtype_matrix_test extends advanced_testcase
         $this->qtype = null;
     }
 
-    public function test_name()
-    {
+    public function test_name() {
         $this->assertEquals($this->qtype->name(), 'matrix');
     }
 
-    public function test_cell_name()
-    {
+    public function test_cell_name() {
         $id = Qtype_matrix::defaut_grading()->cell_name(0, 0, true);
         $match = preg_match('/[a-zA-Z_][a-zA-Z0-9_]*/', $id);
         $this->assertSame(1, $match);

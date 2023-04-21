@@ -26,8 +26,7 @@ defined('MOODLE_INTERNAL') || die();
 class qtype_matrix_test_helper extends question_test_helper
 {
 
-    public function get_test_questions()
-    {
+    public function get_test_questions() {
         return array('kprime', 'all', 'any', 'none', 'weighted', 'multiple', 'single');
     }
 
@@ -35,8 +34,7 @@ class qtype_matrix_test_helper extends question_test_helper
      *
      * @return qtype_matrix_question
      */
-    public function make_matrix_question_multiple()
-    {
+    public function make_matrix_question_multiple() {
         $result = $this->make_matrix_question();
         $result->multiple = true;
         return $result;
@@ -46,8 +44,7 @@ class qtype_matrix_test_helper extends question_test_helper
      *
      * @return qtype_matrix_question
      */
-    public function make_matrix_question_single()
-    {
+    public function make_matrix_question_single() {
         $result = $this->make_matrix_question();
         $result->multiple = false;
         return $result;
@@ -57,8 +54,7 @@ class qtype_matrix_test_helper extends question_test_helper
      *
      * @return qtype_matrix_question
      */
-    public function make_matrix_question_kprime()
-    {
+    public function make_matrix_question_kprime() {
         $result = $this->make_matrix_question();
         $result->grademethod = 'kprime';
         return $result;
@@ -68,8 +64,7 @@ class qtype_matrix_test_helper extends question_test_helper
      *
      * @return qtype_matrix_question
      */
-    public function make_matrix_question_all()
-    {
+    public function make_matrix_question_all() {
         $result = $this->make_matrix_question();
         $result->grademethod = 'all';
         return $result;
@@ -79,8 +74,7 @@ class qtype_matrix_test_helper extends question_test_helper
      *
      * @return qtype_matrix_question
      */
-    public function make_matrix_question_any()
-    {
+    public function make_matrix_question_any() {
         $result = $this->make_matrix_question();
         $result->grademethod = 'any';
         return $result;
@@ -90,8 +84,7 @@ class qtype_matrix_test_helper extends question_test_helper
      *
      * @return qtype_matrix_question
      */
-    public function make_matrix_question_none()
-    {
+    public function make_matrix_question_none() {
         $result = $this->make_matrix_question();
         $result->grademethod = 'none';
         return $result;
@@ -101,20 +94,17 @@ class qtype_matrix_test_helper extends question_test_helper
      *
      * @return qtype_matrix_question
      */
-    public function make_matrix_question_weighted()
-    {
+    public function make_matrix_question_weighted() {
         $result = $this->init_matrix_question();
 
-        for ($r = 0; $r < 4; $r++)
-        {
+        for ($r = 0; $r < 4; $r++) {
             $row = (object) array();
             $row->id = $r;
             $row->shorttext = "Row $r";
             $row->description = "Description $r";
             $row->feedback = "Feedback $r";
             $result->rows[$r] = $row;
-            for ($c = 0; $c < 4; $c++)
-            {
+            for ($c = 0; $c < 4; $c++) {
                 $col = (object) array();
                 $col->id = $c;
                 $col->shorttext = "Column $c";
@@ -135,20 +125,17 @@ class qtype_matrix_test_helper extends question_test_helper
      *
      * @return qtype_matrix_question
      */
-    protected function make_matrix_question()
-    {
+    protected function make_matrix_question() {
         $result = $this->init_matrix_question();
 
-        for ($r = 0; $r < 4; $r++)
-        {
+        for ($r = 0; $r < 4; $r++) {
             $row = (object) array();
             $row->id = $r;
             $row->shorttext = "Row $r";
             $row->description = "Description $r";
             $row->feedback = "Feedback $r";
             $result->rows[$r] = $row;
-            for ($c = 0; $c < 4; $c++)
-            {
+            for ($c = 0; $c < 4; $c++) {
                 $col = (object) array();
                 $col->id = $c;
                 $col->shorttext = "Column $c";

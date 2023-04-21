@@ -34,8 +34,7 @@ class qtype_matrix_renderer extends qtype_with_combined_feedback_renderer
      * @param question_display_options $options controls what should and should not be displayed.
      * @return string HTML fragment.
      */
-    public function formulation_and_controls(question_attempt $qa, question_display_options $options)
-    {
+    public function formulation_and_controls(question_attempt $qa, question_display_options $options) {
 
         $question = $qa->get_question();
         $response = $qa->get_last_qt_data();
@@ -102,8 +101,7 @@ class qtype_matrix_renderer extends qtype_with_combined_feedback_renderer
         return $result;
     }
 
-    public static function matrix_header($header)
-    {
+    public static function matrix_header($header) {
         $text = $header->shorttext;
 
         $description = $header->description['text'];
@@ -118,8 +116,7 @@ class qtype_matrix_renderer extends qtype_with_combined_feedback_renderer
         return '<span class="title">' . format_text($text) . '</span>' . $description;
     }
 
-    protected static function checkbox($name, $checked, $readonly)
-    {
+    protected static function checkbox($name, $checked, $readonly) {
         $readonly = $readonly ? 'readonly="readonly" disabled="disabled"' : '';
         $checked = $checked ? 'checked="checked"' : '';
         return <<<EOT
@@ -127,8 +124,7 @@ class qtype_matrix_renderer extends qtype_with_combined_feedback_renderer
 EOT;
     }
 
-    protected static function radio($name, $value, $checked, $readonly)
-    {
+    protected static function radio($name, $value, $checked, $readonly) {
         $readonly = $readonly ? 'readonly="readonly" disabled="disabled"' : '';
         $checked = $checked ? 'checked="checked"' : '';
         return <<<EOT

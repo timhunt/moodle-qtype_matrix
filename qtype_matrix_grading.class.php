@@ -22,11 +22,9 @@
 abstract class qtype_matrix_grading
 {
 
-    public static function gradings()
-    {
+    public static function gradings() {
         static $result = false;
-        if ($result)
-        {
+        if ($result) {
             return $result;
         }
         $result = array();
@@ -34,20 +32,17 @@ abstract class qtype_matrix_grading
         $dir = dirname(__FILE__) . '/grading';
         $files = scandir($dir);
         $files = array_diff($files, array('.', '..'));
-        foreach ($files as $file)
-        {
+        foreach ($files as $file) {
             include_once("$dir/$file");
             $class = str_replace('.class.php', '', $file);
-            if (class_exists($class))
-            {
+            if (class_exists($class)) {
                 $result[] = new $class();
             }
         }
         return $result;
     }
 
-    public static function default_grading()
-    {
+    public static function default_grading() {
         return self::create('kprime');
     }
 
@@ -56,11 +51,9 @@ abstract class qtype_matrix_grading
      * @param string $type
      * @return qtype_matrix_grading
      */
-    public static function create($type)
-    {
+    public static function create($type) {
         static $result = array();
-        if (isset($result[$type]))
-        {
+        if (isset($result[$type])) {
             return $result[$type];
         }
         $class = 'qtype_matrix_grading_' . $type;
@@ -69,15 +62,13 @@ abstract class qtype_matrix_grading
         return $result[$type] = call_user_func(array($class, 'create'), $type);
     }
 
-    public static function get_name()
-    {
+    public static function get_name() {
         $class = get_called_class();
         $result = str_replace('qtype_matrix_grading_', '', $class);
         return $result;
     }
 
-    public static function get_title()
-    {
+    public static function get_title() {
         $identifier = self::get_name();
         return qtype_matrix::get_string($identifier);
     }
@@ -91,11 +82,9 @@ abstract class qtype_matrix_grading
      * @param bool $multiple    whether the question allows multiple answers
      * @return object
      */
-    public function create_cell_element($form, $row, $col, $multiple)
-    {
+    public function create_cell_element($form, $row, $col, $multiple) {
         $cell_name = $this->cell_name($row, $col, $multiple);
-        if ($multiple)
-        {
+        if ($multiple) {
             return $form->createElement('checkbox', $cell_name, 'label');
         }
         else
@@ -114,15 +103,13 @@ abstract class qtype_matrix_grading
      *
      * @return string
      */
-    public static function cell_name($row, $col, $multiple)
-    {
+    public static function cell_name($row, $col, $multiple) {
         $row = $row ? $row : '0';
         $col = $col ? $col : '0';
         return $multiple ? "cell{$row}_{$col}" : "cell{$row}";
     }
 
-    public static function cell_index($name)
-    {
+    public static function cell_index($name) {
         $name = str_replace('cell', '', $name);
         $result = explode('_', $name);
         return $result;
@@ -135,11 +122,9 @@ abstract class qtype_matrix_grading
      * @param array                 $answers
      * @return float
      */
-    public function grade_question($question, $answers)
-    {
+    public function grade_question($question, $answers) {
         $grades = array();
-        foreach ($question->rows as $row)
-        {
+        foreach ($question->rows as $row) {
             $grades[] = $this->grade_row($question, $row, $answers);
         }
         $result = array_sum($grades) / count($grades);
@@ -156,8 +141,7 @@ abstract class qtype_matrix_grading
      * @param array                     $answers
      * @return float
      */
-    public function grade_row($question, $row, $answers)
-    {
+    public function grade_row($question, $row, $answers) {
         return 0;
     }
 
@@ -168,8 +152,7 @@ abstract class qtype_matrix_grading
      *
      * @return array of errors
      */
-    public function validation($data)
-    {
+    public function validation($data) {
         return array();
     }
 
@@ -181,13 +164,11 @@ abstract class qtype_matrix_grading
 //        return false;
 //    }
 
-    protected function col_count($data)
-    {
+    protected function col_count($data) {
         return count($data['cols_shorttext']);
     }
 
-    protected function row_count($data)
-    {
+    protected function row_count($data) {
         return count($data['rows_shorttext']);
     }
 }

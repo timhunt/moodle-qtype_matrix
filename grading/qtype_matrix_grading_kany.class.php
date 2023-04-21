@@ -25,13 +25,11 @@ class qtype_matrix_grading_kany extends qtype_matrix_grading
 
     const TYPE = 'kany';
 
-    public static function get_name()
-    {
+    public static function get_name() {
         return self::TYPE;
     }
 
-    public static function get_title()
-    {
+    public static function get_title() {
         return qtype_matrix::get_string(self::TYPE);
     }
 
@@ -41,8 +39,7 @@ class qtype_matrix_grading_kany extends qtype_matrix_grading
      * @param string $type
      * @return qtype_matrix_grading_kany
      */
-    public static function create($type)
-    {
+    public static function create($type) {
         static $result = false;
         if ($result) {
             return $result;
@@ -50,8 +47,7 @@ class qtype_matrix_grading_kany extends qtype_matrix_grading
         return $result = new self();
     }
 
-    public function grade_question($question, $answers)
-    {
+    public function grade_question($question, $answers) {
         $numberOfCorrectRows = 0;
         foreach ($question->rows as $row) {
             $grade = $this->grade_row($question, $row, $answers);
@@ -75,8 +71,7 @@ class qtype_matrix_grading_kany extends qtype_matrix_grading
      * @param array $responses                  User's responses
      * @return float                            The row grade, either 0 or 1
      */
-    public function grade_row($question, $row, $responses)
-    {
+    public function grade_row($question, $row, $responses) {
         $one_correct_answer = false;
         foreach ($question->cols as $col) {
             $answer = $question->answer($row, $col);
@@ -91,8 +86,7 @@ class qtype_matrix_grading_kany extends qtype_matrix_grading
         return ($one_correct_answer) ? 1 : 0;
     }
 
-    public function validation($data)
-    {
+    public function validation($data) {
         return array();
     }
 

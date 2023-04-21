@@ -32,28 +32,23 @@ require_once($CFG->dirroot . '/question/type/matrix/libs/question_matrix_store.p
 class qtype_matrix extends question_type
 {
 
-    public static function get_string($identifier, $component = 'qtype_matrix', $a = null)
-    {
+    public static function get_string($identifier, $component = 'qtype_matrix', $a = null) {
         return get_string($identifier, $component, $a);
     }
 
-    public static function gradings()
-    {
+    public static function gradings() {
         return qtype_matrix_grading::gradings();
     }
 
-    public static function grading($type)
-    {
+    public static function grading($type) {
         return qtype_matrix_grading::create($type);
     }
 
-    public static function defaut_grading()
-    {
+    public static function defaut_grading() {
         return qtype_matrix_grading::default_grading();
     }
 
-    function name()
-    {
+    function name() {
         return 'matrix';
     }
 
@@ -64,8 +59,7 @@ class qtype_matrix extends question_type
      * @param integer $context_id The context id
      * @return boolean to indicate success of failure.
      */
-    function delete_question_options($question_id, $context_id = null)
-    {
+    function delete_question_options($question_id, $context_id = null) {
         if (empty($question_id)) {
             return false;
         }
@@ -83,8 +77,7 @@ class qtype_matrix extends question_type
      * @param integer $context_id
      * @return boolean to indicate success of failure.
      */
-    function delete_question($question_id, $context_id = null)
-    {
+    function delete_question($question_id, $context_id = null) {
         if (empty($question_id)) {
             return false;
         }
@@ -104,8 +97,7 @@ class qtype_matrix extends question_type
     /**
      * @return boolean true if this question type sometimes requires manual grading.
      */
-    function is_manual_graded()
-    {
+    function is_manual_graded() {
         return true;
     }
 
@@ -114,8 +106,7 @@ class qtype_matrix extends question_type
      * @param object $question
      * @return boolean
      */
-    function get_question_options($question)
-    {
+    function get_question_options($question) {
         parent::get_question_options($question);
         $matrix = self::retrieve_matrix($question->id);
         if ($matrix) {
@@ -139,8 +130,7 @@ class qtype_matrix extends question_type
         return true;
     }
 
-    static function retrieve_matrix($question_id)
-    {
+    static function retrieve_matrix($question_id) {
         $store = new question_matrix_store();
 
         if (empty($question_id)) {
@@ -179,8 +169,7 @@ class qtype_matrix extends question_type
      * @param question_definition $question the question_definition we are creating.
      * @param object $questiondata the question data loaded from the database.
      */
-    protected function initialise_question_instance(question_definition $question, $questiondata)
-    {
+    protected function initialise_question_instance(question_definition $question, $questiondata) {
         parent::initialise_question_instance($question, $questiondata);
         $question->rows = $questiondata->options->rows;
         $question->cols = $questiondata->options->cols;
@@ -197,8 +186,7 @@ class qtype_matrix extends question_type
      * @param object $question This holds the information from the editing form, it is not a standard question object.
      * @return object $result->error or $result->noticeyesno or $result->notice
      */
-    function save_question_options($question)
-    {
+    function save_question_options($question) {
         global $DB;
         $store = new question_matrix_store();
 
@@ -359,8 +347,7 @@ class qtype_matrix extends question_type
      * @param boolean $from_multiple    Whether we extract from multiple representation or not
      * @result array                    The weights
      */
-    public function to_weigth_matrix($data, $from_multiple)
-    {
+    public function to_weigth_matrix($data, $from_multiple) {
         $data = (object) $data;
         $result = array();
         $row_count = 20;
@@ -399,8 +386,7 @@ class qtype_matrix extends question_type
      * @param array $matrix Array of arrays
      * @return boolean True if the matrix contains only zeros. False otherwise
      */
-    public function is_matrix_empty($matrix)
-    {
+    public function is_matrix_empty($matrix) {
         foreach ($matrix as $row) {
             foreach ($row as $value) {
                 if ($value && $value > 0) {
@@ -419,8 +405,7 @@ class qtype_matrix extends question_type
      * @param object $question
      * @param string $wizardnow is '' for first page.
      */
-    public function display_question_editing_page($mform, $question, $wizardnow)
-    {
+    public function display_question_editing_page($mform, $question, $wizardnow) {
         global $OUTPUT;
         $heading = $this->get_heading(empty($question->id));
 
@@ -433,8 +418,7 @@ class qtype_matrix extends question_type
     }
 
     // mod_ND : BEGIN
-    public function extra_question_fields()
-    {
+    public function extra_question_fields() {
         return array('question_matrix', 'use_dnd_ui', 'grademethod', 'multiple');
     }
 

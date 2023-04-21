@@ -26,13 +26,11 @@ class qtype_matrix_grading_all extends qtype_matrix_grading
 
     const TYPE = 'all';
 
-    public static function get_name()
-    {
+    public static function get_name() {
         return self::TYPE;
     }
 
-    public static function get_title()
-    {
+    public static function get_title() {
         return qtype_matrix::get_string(self::TYPE);
     }
 
@@ -42,11 +40,9 @@ class qtype_matrix_grading_all extends qtype_matrix_grading
      * @param string $type
      * @return qtype_matrix_grading_all
      */
-    public static function create($type)
-    {
+    public static function create($type) {
         static $result = false;
-        if ($result)
-        {
+        if ($result) {
             return $result;
         }
         return $result = new self();
@@ -60,8 +56,7 @@ class qtype_matrix_grading_all extends qtype_matrix_grading
      * @param array $responses                  User's responses
      * @return float                            The row grade, either 0 or 1
      */
-    public function grade_row($question, $row, $responses)
-    {
+    public function grade_row($question, $row, $responses) {
         foreach ($question->cols as $col) {
             $answer = $question->answer($row, $col);
             $response = $question->response($responses, $row, $col);
