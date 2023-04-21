@@ -17,8 +17,7 @@
 /**
  *
  */
-class question_matrix_store
-{
+class question_matrix_store {
 
     const COMPONENT = 'qtype_matrix';
     const TABLE_QUESTION_MATRIX = 'question_matrix';
@@ -26,12 +25,12 @@ class question_matrix_store
     const TABLE_QUESTION_MATRIX_COLS = 'question_matrix_cols';
     const TABLE_QUESTION_MATRIX_WEIGHTS = 'question_matrix_weights';
 
-    //question
+    // Question.
 
-    public function get_matrix_by_question_id($question_id) {
+    public function get_matrix_by_question_id($questionid) {
         global $DB;
 
-        $result = $DB->get_record(self::TABLE_QUESTION_MATRIX, array('questionid' => $question_id));
+        $result = $DB->get_record(self::TABLE_QUESTION_MATRIX, array('questionid' => $questionid));
         if ($result) {
             $result->multiple = (bool) $result->multiple;
         }
@@ -39,8 +38,8 @@ class question_matrix_store
     }
 
     public function save_matrix($question) {
-        $is_new = empty($question->id);
-        if ($is_new) {
+        $isnew = empty($question->id);
+        if ($isnew) {
             return $this->insert_matrix($question);
         }
 
@@ -87,7 +86,7 @@ class question_matrix_store
         return $matrix;
     }
 
-    function delete_question($question_id) {
+    public function delete_question($question_id) {
         if (empty($question_id)) {
             return false;
         }
@@ -95,11 +94,8 @@ class question_matrix_store
         global $DB, $CFG;
         $prefix = $CFG->prefix;
 
-        /**
-         * Note
-         * $DB->execute does not accept multiple SQL statements
-         */
-        //wheights
+        // Note: $DB->execute does not accept multiple SQL statements.
+        // Weights.
         $sql = "DELETE FROM {$prefix}question_matrix_weights
                 WHERE {$prefix}question_matrix_weights.rowid IN
                       (
@@ -109,7 +105,7 @@ class question_matrix_store
                       )";
         $DB->execute($sql);
 
-        //rows
+        // Rows.
         $sql = "DELETE FROM {$prefix}question_matrix_rows
                 WHERE {$prefix}question_matrix_rows.matrixid IN
                       (
@@ -118,7 +114,7 @@ class question_matrix_store
                       )";
         $DB->execute($sql);
 
-        //cols
+        // Cols.
         $sql = "DELETE FROM {$prefix}question_matrix_cols
                 WHERE {$prefix}question_matrix_cols.matrixid IN
                       (
@@ -127,7 +123,7 @@ class question_matrix_store
                       )";
         $DB->execute($sql);
 
-        //matrix
+        // Matrix.
         $sql = "DELETE FROM {$prefix}question_matrix WHERE questionid = $question_id";
         $DB->execute($sql);
 
@@ -135,12 +131,12 @@ class question_matrix_store
         return true;
     }
 
-    //row
+    // Row.
 
-    public function get_matrix_rows_by_matrix_id($matrix_id) {
+    public function get_matrix_rows_by_matrix_id($matrixid) {
         global $DB;
 
-        $result = $DB->get_records(self::TABLE_QUESTION_MATRIX_ROWS, array('matrixid' => $matrix_id), 'id ASC');
+        $result = $DB->get_records(self::TABLE_QUESTION_MATRIX_ROWS, array('matrixid' => $matrixid), 'id ASC');
 
         if (!$result) {
             return array();
@@ -161,8 +157,8 @@ class question_matrix_store
     }
 
     public function save_matrix_row($row) {
-        $is_new = empty($row->id);
-        if ($is_new) {
+        $isnew = empty($row->id);
+        if ($isnew) {
             return $this->insert_matrix_row($row);
         }
 
@@ -237,8 +233,8 @@ class question_matrix_store
     }
 
     public function save_matrix_col($col) {
-        $is_new = empty($col->id);
-        if ($is_new) {
+        $isnew = empty($col->id);
+        if ($isnew) {
             return $this->insert_matrix_col($col);
         }
 

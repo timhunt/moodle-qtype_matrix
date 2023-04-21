@@ -17,8 +17,7 @@
 /**
  *  Helper class for strings
  */
-class lang
-{
+class lang {
 
     const COMPONENT = 'qtype_matrix';
 

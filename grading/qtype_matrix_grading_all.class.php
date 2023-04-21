@@ -21,8 +21,7 @@
  * For a row all of the correct and none of the wrong answers must be selected
  * to get 100% otherwise 0.
  */
-class qtype_matrix_grading_all extends qtype_matrix_grading
-{
+class qtype_matrix_grading_all extends qtype_matrix_grading {
 
     const TYPE = 'all';
 

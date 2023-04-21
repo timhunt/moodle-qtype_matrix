@@ -29,8 +29,7 @@ require_once($CFG->dirroot . '/question/type/matrix/libs/question_matrix_store.p
  *
  * Pretty simple concept - a matrix with a number of different grading methods and options.
  */
-class qtype_matrix extends question_type
-{
+class qtype_matrix extends question_type {
 
     public static function get_string($identifier, $component = 'qtype_matrix', $a = null) {
         return get_string($identifier, $component, $a);

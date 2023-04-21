@@ -22,8 +22,7 @@
  * to get 100% otherwise he gets 0%. Including rows.
  * If one row is wrong then the mark for the question is 0.
  */
-class qtype_matrix_grading_kprime extends qtype_matrix_grading
-{
+class qtype_matrix_grading_kprime extends qtype_matrix_grading {
 
     const TYPE = 'kprime';
 

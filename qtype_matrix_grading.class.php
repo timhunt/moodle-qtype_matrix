@@ -19,8 +19,7 @@
  *
  * @abstract
  */
-abstract class qtype_matrix_grading
-{
+abstract class qtype_matrix_grading {
 
     public static function gradings() {
         static $result = false;

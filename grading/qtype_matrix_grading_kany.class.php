@@ -20,8 +20,7 @@
  *
  * Any correct and no wrong answer to get 100% otherwise 0
  */
-class qtype_matrix_grading_kany extends qtype_matrix_grading
-{
+class qtype_matrix_grading_kany extends qtype_matrix_grading {
 
     const TYPE = 'kany';
 

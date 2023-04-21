@@ -14,8 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * restore plugin class that provides the necessary information
  * needed to restore one match qtype plugin
@@ -24,47 +22,45 @@ defined('MOODLE_INTERNAL') || die();
  * Failing to see why we are using $GLOBALS here. Adding a property to the class
  * should do the work.
  */
-class restore_qtype_matrix_plugin extends restore_qtype_plugin
-{
+class restore_qtype_matrix_plugin extends restore_qtype_plugin {
 
     /**
-     * Returns the paths to be handled by the plugin at question level
+     * Returns the paths to be handled by the plugin at question level.
      */
     protected function define_question_plugin_structure() {
         $result = array();
 
         $elename = 'matrix';
-        $elepath = $this->get_pathfor('/matrix'); // we used get_recommended_name() so this works
+        $elepath = $this->get_pathfor('/matrix'); // We used get_recommended_name() so this works.
         $result[] = new restore_path_element($elename, $elepath);
 
         $elename = 'col';
-        $elepath = $this->get_pathfor('/matrix/cols/col'); // we used get_recommended_name() so this works
+        $elepath = $this->get_pathfor('/matrix/cols/col'); // We used get_recommended_name() so this works.
         $result[] = new restore_path_element($elename, $elepath);
 
         $elename = 'row';
-        $elepath = $this->get_pathfor('/matrix/rows/row'); // we used get_recommended_name() so this works
+        $elepath = $this->get_pathfor('/matrix/rows/row'); // We used get_recommended_name() so this works.
         $result[] = new restore_path_element($elename, $elepath);
 
         $elename = 'weight';
-        $elepath = $this->get_pathfor('/matrix/weights/weight'); // we used get_recommended_name() so this works
+        $elepath = $this->get_pathfor('/matrix/weights/weight'); // We used get_recommended_name() so this works.
         $result[] = new restore_path_element($elename, $elepath);
 
         return $result;
     }
 
     /**
-     * Detect if the question is created or mapped
+     * Detect if the question is created or mapped.
      *
      * @return bool
      */
     protected function is_question_created() {
         $oldquestionid = $this->get_old_parentid('question');
-        //$newquestionid = $this->get_new_parentid('question');
-        return $this->get_mappingid('question_created', $oldquestionid) ? true : false;
+        return (bool) $this->get_mappingid('question_created', $oldquestionid);
     }
 
     /**
-     * Process the qtype/matrix
+     * Process the qtype/matrix.
      *
      * @param $data
      */
@@ -78,7 +74,7 @@ class restore_qtype_matrix_plugin extends restore_qtype_plugin
         $data = (object) $data;
         $oldid = $data->id;
 
-        //todo: check import of version moodle1 data
+        // Todo: check import of version moodle1 data.
 
         $data->questionid = $this->get_new_parentid('question');
         $newitemid = $DB->insert_record('question_matrix', $data);
@@ -86,7 +82,7 @@ class restore_qtype_matrix_plugin extends restore_qtype_plugin
     }
 
     /**
-     * Process the qtype/cols/col
+     * Process the qtype/cols/col.
      *
      * @param $data
      */
@@ -109,7 +105,7 @@ class restore_qtype_matrix_plugin extends restore_qtype_plugin
     }
 
     /**
-     * Process the qtype/rows/row element
+     * Process the qtype/rows/row element.
      *
      * @param $data
      */
@@ -208,7 +204,7 @@ class restore_qtype_matrix_plugin extends restore_qtype_plugin
     protected function recode_choice_order($order) {
         $neworder = array();
         foreach (explode(',', $order) as $id) {
-            if ($newid = $GLOBALS['matrixTempRows'][$id]) {//$this->get_mappingid('row', $id)) {
+            if ($newid = $GLOBALS['matrixTempRows'][$id]) { // $this->get_mappingid('row', $id)) {
                 $neworder[] = $newid;
             }
         }

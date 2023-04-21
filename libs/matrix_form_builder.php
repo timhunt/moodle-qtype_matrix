@@ -17,14 +17,13 @@
 /**
  * Helper class to build the form.
  */
-class matrix_form_builder implements ArrayAccess
-{
+class matrix_form_builder implements ArrayAccess {
 
     private $_form = null;
 
-    function __construct($form) {
-       $this->_form = $form;
-   }
+    public function __construct($form) {
+        $this->_form = $form;
+    }
 
     public function create_name() {
         static $count = 0;
@@ -46,32 +45,34 @@ class matrix_form_builder implements ArrayAccess
 
     public function create_text($name, $label = '') {
         if ($label === '') {
-            $short_name = explode('[', $name);
-            $short_name = reset($short_name);
-            $label = qtype_matrix::get_string($short_name);
+            $shortname = explode('[', $name);
+            $shortname = reset($shortname);
+            $label = qtype_matrix::get_string($shortname);
         }
         return $this->_form->createElement('text', $name, $label);
     }
 
     public function create_htmleditor($name, $label = '') {
         if ($label === '') {
-            $short_name = explode('[', $name);
-            $short_name = reset($short_name);
-            $label = qtype_matrix::get_string($short_name);
+            $shortname = explode('[', $name);
+            $shortname = reset($shortname);
+            $label = qtype_matrix::get_string($shortname);
         }
         return $this->_form->createElement('editor', $name, $label);
     }
 
     public function create_htmlpopup($name, $label = '') {
-        static $pop_count = 0;
-        $pop_count++;
-        $id = "htmlpopup$pop_count";
+        static $popcount = 0;
+        $popcount++;
+        $id = "htmlpopup$popcount";
 
         $result = array();
-        $result[] = $this->create_static('<a class="pbutton input-group-addon" href="#" onclick="mtrx_popup(\'' . $id . '\');return false;" ><i class="fa fa-commenting-o"></i> </a>');
+        $result[] = $this->create_static('<a class="pbutton input-group-addon" href="#" onclick="mtrx_popup(\'' . $id .
+                '\');return false;" ><i class="fa fa-commenting-o"></i> </a>');
         $result[] = $this->create_static('<div id="' . $id . '" class="popup">');
         $result[] = $this->create_static('<div>');
-        $result[] = $this->create_static('<a class="pbutton close" href="#" onclick="mtrx_popup(\'' . $id . '\');return false;" >&nbsp;&nbsp;&nbsp;</a>');
+        $result[] = $this->create_static('<a class="pbutton close" href="#" onclick="mtrx_popup(\'' . $id .
+                '\');return false;" >&nbsp;&nbsp;&nbsp;</a>');
         $result[] = $this->create_static('<span class="title">');
         $result[] = $this->create_static($label);
         $result[] = $this->create_static('</span>');
@@ -85,29 +86,29 @@ class matrix_form_builder implements ArrayAccess
         return $this->_form->createElement('hidden', $name, $value);
     }
 
-    public function create_group($name = null, $label = null, $elements = null, $separator = '', $appendName = true) {
+    public function create_group($name = null, $label = null, $elements = null, $separator = '', $appendname = true) {
         if ($label === '') {
-            $short_name = explode('[', $name);
-            $short_name = reset($short_name);
-            $label = qtype_matrix::get_string($short_name);
+            $shortname = explode('[', $name);
+            $shortname = reset($shortname);
+            $label = qtype_matrix::get_string($shortname);
         }
-        return $this->_form->createElement('group', $name, $label, $elements, $separator, $appendName);
+        return $this->_form->createElement('group', $name, $label, $elements, $separator, $appendname);
     }
 
     public function create_header($name, $label = '') {
         if ($label === '') {
-            $short_name = explode('[', $name);
-            $short_name = reset($short_name);
-            $label = qtype_matrix::get_string($short_name);
+            $shortname = explode('[', $name);
+            $shortname = reset($shortname);
+            $label = qtype_matrix::get_string($shortname);
         }
         return $this->_form->createElement('header', $name, $label);
     }
 
     public function create_submit($name, $label = '', $attributes = null) {
         if ($label === '') {
-            $short_name = explode('[', $name);
-            $short_name = reset($short_name);
-            $label = qtype_matrix::get_string($short_name);
+            $shortname = explode('[', $name);
+            $shortname = reset($shortname);
+            $label = qtype_matrix::get_string($shortname);
         }
         return $this->_form->createElement('submit', $name, $label, $attributes);
     }
@@ -123,18 +124,18 @@ class matrix_form_builder implements ArrayAccess
 
     public function add_text($name, $label = '') {
         if ($label === '') {
-            $short_name = explode('[', $name);
-            $short_name = reset($short_name);
-            $label = qtype_matrix::get_string($short_name);
+            $shortname = explode('[', $name);
+            $shortname = reset($shortname);
+            $label = qtype_matrix::get_string($shortname);
         }
         return $this->_form->addElement('text', $name, $label);
     }
 
     public function add_htmleditor($name, $label = '') {
         if ($label === '') {
-            $short_name = explode('[', $name);
-            $short_name = reset($short_name);
-            $label = qtype_matrix::get_string($short_name);
+            $shortname = explode('[', $name);
+            $shortname = reset($shortname);
+            $label = qtype_matrix::get_string($shortname);
         }
         return $this->_form->addElement('htmleditor', $name, $label);
     }
@@ -143,47 +144,47 @@ class matrix_form_builder implements ArrayAccess
         return $this->_form->addElement('hidden', $name, $value);
     }
 
-    public function add_group($name = null, $label = null, $elements = null, $separator = '', $appendName = true) {
+    public function add_group($name = null, $label = null, $elements = null, $separator = '', $appendname = true) {
         if ($label === '') {
-            $short_name = explode('[', $name);
-            $short_name = reset($short_name);
-            $label = qtype_matrix::get_string($short_name);
+            $shortname = explode('[', $name);
+            $shortname = reset($shortname);
+            $label = qtype_matrix::get_string($shortname);
         }
-        return $this->_form->addElement('group', $name, $label, $elements, $separator, $appendName);
+        return $this->_form->addElement('group', $name, $label, $elements, $separator, $appendname);
     }
 
     public function add_header($name, $label = '') {
         if ($label === '') {
-            $short_name = explode('[', $name);
-            $short_name = reset($short_name);
-            $label = qtype_matrix::get_string($short_name);
+            $shortname = explode('[', $name);
+            $shortname = reset($shortname);
+            $label = qtype_matrix::get_string($shortname);
         }
         return $this->_form->addElement('header', $name, $label);
     }
 
     public function add_selectyesno($name, $label = '') {
         if ($label === '') {
-            $short_name = explode('[', $name);
-            $short_name = reset($short_name);
-            $label = qtype_matrix::get_string($short_name);
+            $shortname = explode('[', $name);
+            $shortname = reset($shortname);
+            $label = qtype_matrix::get_string($shortname);
         }
         return $this->_form->addElement('advcheckbox', $name, $label);
     }
 
     public function add_select($name, $label = '', $options = null) {
         if ($label === '') {
-            $short_name = explode('[', $name);
-            $short_name = reset($short_name);
-            $label = qtype_matrix::get_string($short_name);
+            $shortname = explode('[', $name);
+            $shortname = reset($shortname);
+            $label = qtype_matrix::get_string($shortname);
         }
         return $this->_form->addElement('select', $name, $label, $options);
     }
 
     public function add_submit($name, $label = '') {
         if ($label === '') {
-            $short_name = explode('[', $name);
-            $short_name = reset($short_name);
-            $label = qtype_matrix::get_string($short_name);
+            $shortname = explode('[', $name);
+            $shortname = reset($shortname);
+            $label = qtype_matrix::get_string($shortname);
         }
         return $this->_form->addElement('submit', $name, $label);
     }
@@ -207,19 +208,19 @@ class matrix_form_builder implements ArrayAccess
         return $this->_form->elementExists($name);
     }
 
-    public function insert_element_before($element, $before_name) {
-        return $this->_form->insertElementBefore($element, $before_name);
+    public function insert_element_before($element, $beforename) {
+        return $this->_form->insertElementBefore($element, $beforename);
     }
 
-    public function disabled_if($elementName, $dependentOn, $condition = 'notchecked', $value = '1') {
-        $this->_form->disabledIf($elementName, $dependentOn, $condition, $value);
+    public function disabled_if($elementname, $dependenton, $condition = 'notchecked', $value = '1') {
+        $this->_form->disabledIf($elementname, $dependenton, $condition, $value);
     }
 
     public function register_no_submit_button($name) {
         $this->_form->registerNoSubmitButton($name);
     }
 
-    // implement ArrayAccess
+    // Implement ArrayAccess.
 
     public function offsetExists($offset) {
         return $this->_form->elementExists($offset);
